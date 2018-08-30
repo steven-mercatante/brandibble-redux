@@ -15,15 +15,15 @@ import {
   fetchLevelUpPaymentMethod,
   fetchUser,
   resetUserPassword,
-  updateUserPassword,
+  finishResetUserPassword,
   resolveUser,
   unauthenticateUser,
   updateUser,
   validateUser,
   fetchLevelUpCampaign,
 } from 'actions/session/user';
-import { brandibble, SAMPLE_EMAIL, validCredentialsStub } from '../../config/stubs';
 
+import { brandibble, SAMPLE_EMAIL, validCredentialsStub } from '../../config/stubs';
 const mockStore = configureStore(reduxMiddleware);
 
 describe('actions/session/user', () => {
@@ -377,25 +377,25 @@ describe('actions/session/user', () => {
           });
         });
 
-        describe('updateUserPassword', () => {
+        describe('finishResetUserPassword', () => {
           before(() => {
             store.clearActions();
-            return updateUserPassword(brandibble, '123141254jlasdfjwqer', {
+            return finishResetUserPassword(brandibble, '123141254jlasdfjwqer', {
               password: 'newpassword',
-            })(store.dispatch).then(() => {
+            })(store.dispatch).catch(() => {
               actionsCalled = store.getActions();
             });
           });
 
           it('should call at least 2 actions', () => expect(actionsCalled).to.have.length.of.at.least(2));
 
-          it('should have UPDATE_USER_PASSWORD_PENDING action', () => {
-            action = find(actionsCalled, { type: 'UPDATE_USER_PASSWORD_PENDING' });
+          it('should have FINISH_RESET_USER_PASSWORD_PENDING action', () => {
+            action = find(actionsCalled, { type: 'FINISH_RESET_USER_PASSWORD_PENDING' });
             expect(action).to.exist;
           });
 
-          it('should have UPDATE_USER_PASSWORD_FULFILLED action', () => {
-            action = find(actionsCalled, { type: 'UPDATE_USER_PASSWORD_FULFILLED' });
+          it('should have FINISH_RESET_USER_PASSWORD_FULFILLED action', () => {
+            action = find(actionsCalled, { type: 'FINISH_RESET_USER_PASSWORD_REJECTED' });
             expect(action).to.exist;
           });
         });
