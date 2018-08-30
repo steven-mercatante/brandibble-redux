@@ -60,7 +60,7 @@ import {
   FETCH_USER,
   UNAUTHENTICATE_USER,
   RESET_USER_PASSWORD,
-  UPDATE_USER_PASSWORD,
+  FINISH_RESET_USER_PASSWORD,
   RESET_LEVELUP_PASSWORD,
   RESOLVE_USER,
   VALIDATE_USER,
@@ -136,6 +136,7 @@ const initialState = {
   createUser: IDLE,
   fetchUser: IDLE,
   resetUserPassword: IDLE,
+  finishResetUserPassword: IDLE,
   resetLevelUpPassword: IDLE,
   resolveUser: IDLE,
   unauthenticateUser: IDLE,
@@ -366,9 +367,9 @@ export default (state = initialState, action) => {
     case `${RESET_USER_PASSWORD}_FULFILLED`: return { ...state, resetUserPassword: FULFILLED };
     case `${RESET_USER_PASSWORD}_REJECTED`: return { ...state, resetUserPassword: REJECTED };
 
-    case `${UPDATE_USER_PASSWORD}_PENDING`: return { ...state, updateUserPassword: PENDING };
-    case `${UPDATE_USER_PASSWORD}_FULFILLED`: return { ...state, updateUserPassword: FULFILLED };
-    case `${UPDATE_USER_PASSWORD}_REJECTED`: return { ...state, updateUserPassword: REJECTED };
+    case `${FINISH_RESET_USER_PASSWORD}_PENDING`: return { ...state, finishResetUserPassword: PENDING };
+    case `${FINISH_RESET_USER_PASSWORD}_FULFILLED`: return { ...state, finishResetUserPassword: FULFILLED };
+    case `${FINISH_RESET_USER_PASSWORD}_REJECTED`: return { ...state, finishResetUserPassword: REJECTED };
 
     case `${RESET_LEVELUP_PASSWORD}_PENDING`: return { ...state, resetLevelUpPassword: PENDING };
     case `${RESET_LEVELUP_PASSWORD}_FULFILLED`: return { ...state, resetLevelUpPassword: FULFILLED };

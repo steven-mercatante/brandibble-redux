@@ -53,6 +53,7 @@ export {
   fetchLevelUpPaymentMethod,
   fetchUser,
   resetUserPassword,
+  finishResetUserPassword,
   resetLevelUpPassword,
   resolveUser,
   unauthenticateUser,

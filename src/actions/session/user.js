@@ -11,7 +11,7 @@ export const UNAUTHENTICATE_USER = 'UNAUTHENTICATE_USER';
 export const RESOLVE_USER = 'RESOLVE_USER';
 export const FETCH_USER = 'FETCH_USER';
 export const RESET_USER_PASSWORD = 'RESET_USER_PASSWORD';
-export const UPDATE_USER_PASSWORD = 'UPDATE_USER_PASSWORD';
+export const FINISH_RESET_USER_PASSWORD = 'FINISH_RESET_USER_PASSWORD';
 export const RESET_LEVELUP_PASSWORD = 'RESET_LEVELUP_PASSWORD';
 export const ADD_ALLERGENS = 'ADD_ALLERGENS';
 export const REMOVE_ALLERGENS = 'REMOVE_ALLERGENS';
@@ -79,11 +79,11 @@ export const resetUserPassword = (brandibble, body) => (dispatch) => {
   return dispatch(fireAction(RESET_USER_PASSWORD, payload));
 };
 
-export const updateUserPassword = (brandibble, token, body) => (dispatch) => {
-  const payload = brandibble.customers.updatePassword(token, body)
+export const finishResetUserPassword = (brandibble, token, body) => (dispatch) => {
+  const payload = brandibble.customers.finishResetPassword(token, body)
     .catch(handleErrors);
 
-  return dispatch(fireAction(UPDATE_USER_PASSWORD, payload));
+  return dispatch(fireAction(FINISH_RESET_USER_PASSWORD, payload));
 };
 
 export const resetLevelUpPassword = (brandibble, email) => (dispatch) => {
