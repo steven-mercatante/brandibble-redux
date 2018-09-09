@@ -297,6 +297,6 @@ export function bindCustomerToOrder(...args) {
   return dispatch => dispatch(_bindCustomerToOrder(...args));
 }
 
-export function submitOrder(brandibble, order, options) {
+export function submitOrder(brandibble, order, options = {}) {
   return dispatch => dispatch(_submitOrder(dispatch, brandibble, order, options));
 }
