@@ -201,6 +201,10 @@ export function validateCurrentCart(brandibble, data = {}) {
   return (dispatch) => {
     const { orders } = brandibble;
     const order = orders.current();
+    /* Don't send password to validate endpoints */
+    if (order.customer && order.customer.password) {
+      delete order.customer.password;
+    }
     const payload = orders.validateCart(order, data).then(res => res);
     return dispatch(_validateCurrentCart(payload));
   };
@@ -210,6 +214,10 @@ export function validateCurrentOrder(brandibble, data = {}) {
   return (dispatch) => {
     const { orders } = brandibble;
     const order = orders.current();
+    /* Don't send password to validate endpoints */
+    if (order.customer && order.customer.password) {
+      delete order.customer.password;
+    }
     const payload = orders.validate(order, data).then(res => res);
     return dispatch(_validateCurrentOrder(payload));
   };
