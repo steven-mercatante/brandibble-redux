@@ -3,6 +3,7 @@ import BrandibbleReduxException from '../../utils/exception';
 import { Defaults } from '../../utils/constants';
 import fireAction from '../../utils/fireAction';
 import handleErrors from '../../utils/handleErrors';
+import { authenticatedUser, resolveUser } from './user';
 
 export const RESOLVE_ORDER = 'RESOLVE_ORDER';
 export const RESOLVE_ORDER_LOCATION = 'RESOLVE_ORDER_LOCATION';
@@ -134,10 +135,21 @@ function _setRequestedAt(order, time, wantsFuture) {
   };
 }
 
-function _submitOrder(brandibble, order) {
+function _submitOrder(dispatch, brandibble, order, shouldAuthenticate = false) {
+  let authStub; 
+  if (shouldAuthenticate && order && order.customer && !order.customer.customer_id) {
+    authStub = {
+      email: order.customer.email,
+      password: order.customer.password
+    };
+  }
+
   return {
     type: SUBMIT_ORDER,
-    payload: brandibble.orders.submit(order).then(({ data }) => data),
+    payload: brandibble.orders.submit(order).then(({ data }) => {
+      if (!authStub) return data;
+      return dispatch(authenticateUser(brandibble, authStub).then(() => dispatch(resolveUser(brandibble))).then(() => data);
+    }),
   };
 }
 
@@ -285,6 +297,6 @@ export function bindCustomerToOrder(...args) {
   return dispatch => dispatch(_bindCustomerToOrder(...args));
 }
 
-export function submitOrder(...args) {
-  return dispatch => dispatch(_submitOrder(...args));
+export function submitOrder(brandibble, order, shouldAuthenticate = false) {
+  return dispatch => dispatch(_submitOrder(dispatch, brandibble, order, shouldAuthenticate));
 }
