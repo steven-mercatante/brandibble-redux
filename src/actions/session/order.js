@@ -137,11 +137,12 @@ function _setRequestedAt(order, time, wantsFuture) {
 
 function _submitOrder(dispatch, brandibble, order, options) {
   let authStub; 
+
   if (options && options.authenticateNewCustomer && order && order.customer && !order.customer.customer_id) {
-    authStub = {
-      email: order.customer.email,
-      password: order.customer.password
-    };
+    const { email, password } = order.customer;
+    if (password && password.length) {
+      authStub = { email, password };
+    }
   }
 
   return {
