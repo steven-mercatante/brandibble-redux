@@ -149,7 +149,10 @@ function _submitOrder(dispatch, brandibble, order, options) {
     type: SUBMIT_ORDER,
     payload: brandibble.orders.submit(order).then(({ data }) => {
       if (!authStub) return data;
-      return dispatch(authenticateUser(brandibble, authStub)).then(() => data);
+      return dispatch(authenticateUser(brandibble, authStub)).then(() => {
+        data._didAuthenticateNewCustomer = true;
+        return data;
+      });
     }),
   };
 }
