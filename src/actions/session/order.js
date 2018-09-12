@@ -137,17 +137,24 @@ function _setRequestedAt(order, time, wantsFuture) {
 
 function _submitOrder(dispatch, brandibble, order, options) {
   let authStub; 
+  let submitOptions = {};
 
-  if (options && options.authenticateNewCustomer && order && order.customer && !order.customer.customer_id) {
-    const { email, password } = order.customer;
-    if (password && password.length) {
-      authStub = { email, password };
+  if (options) {
+    if (options.authenticateNewCustomer && order && order.customer && !order.customer.customer_id) {
+      const { email, password } = order.customer;
+      if (password && password.length) {
+        authStub = { email, password };
+      }
+    }
+
+    if (options.includeItemDetails) {
+      submitOptions.includeItemDetails = true;
     }
   }
 
   return {
     type: SUBMIT_ORDER,
-    payload: brandibble.orders.submit(order).then(({ data }) => {
+    payload: brandibble.orders.submit(order, submitOptions).then(({ data }) => {
       if (!authStub) return data;
       return dispatch(authenticateUser(brandibble, authStub)).then(() => {
         data._didAuthenticateNewCustomer = true;

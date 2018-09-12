@@ -989,9 +989,9 @@ braces@^2.3.0, braces@^2.3.1:
     split-string "^3.0.2"
     to-regex "^3.0.1"
 
-"brandibble@git+https://git@github.com/sanctuarycomputer/brandibble.js#c35d814f4c0e46e0635ba4c5c785262692e8c7aa":
+"brandibble@git+https://git@github.com/sanctuarycomputer/brandibble.js#de431526bf47c67486c1741772debb9b3aa455e2":
   version "1.13.8"
-  resolved "git+https://git@github.com/sanctuarycomputer/brandibble.js#c35d814f4c0e46e0635ba4c5c785262692e8c7aa"
+  resolved "git+https://git@github.com/sanctuarycomputer/brandibble.js#de431526bf47c67486c1741772debb9b3aa455e2"
   dependencies:
     circular-json "^0.3.1"
     es6-promise "^4.0.5"
