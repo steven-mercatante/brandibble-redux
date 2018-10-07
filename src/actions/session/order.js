@@ -218,7 +218,12 @@ export function validateCurrentOrder(brandibble, data = {}) {
   return dispatch => {
     const { orders } = brandibble;
     const order = orders.current();
-    const payload = orders.validate(order, data).then(res => res);
+    console.log('send this data:', data)
+    // const payload = orders.validate(order, data).then(res => res);
+    const payload = orders.validate(order, data).then(res => {
+      console.log('got this response:', res)
+      return res
+    });
     return dispatch(_validateCurrentOrder(payload));
   };
 }
