@@ -1,4 +1,4 @@
-import map from 'lodash.map';
+import map from "lodash.map";
 import {
   ADD_LINE_ITEM,
   PUSH_LINE_ITEM,
@@ -19,19 +19,26 @@ import {
   SUBMIT_ORDER,
   SET_LINE_ITEM_MADE_FOR,
   SET_LINE_ITEM_INSTRUCTIONS
-} from 'actions/session/order';
+} from "actions/session/order";
 
 const initialState = {
   ref: null,
   orderData: null,
   lineItemsData: null,
   validated: null,
-  validatedCart: null,
+  validatedCart: null
 };
 
 function _buildFormattedLineItemsHash(ref) {
-  return map(ref.cart.lineItems, (li) => {
-    const { uuid, quantity, madeFor, instructions, product, operationMaps } = li;
+  return map(ref.cart.lineItems, li => {
+    const {
+      uuid,
+      quantity,
+      madeFor,
+      instructions,
+      product,
+      operationMaps
+    } = li;
     return {
       uuid,
       quantity,
@@ -40,7 +47,7 @@ function _buildFormattedLineItemsHash(ref) {
       isValid: li.isValid(),
       errors: li.errors(),
       productData: product,
-      optionGroupMappings: operationMaps,
+      optionGroupMappings: operationMaps
     };
   });
 }
@@ -60,6 +67,7 @@ export default function order(state = initialState, action) {
     case `${ADD_OPTION_TO_LINE_ITEM}_FULFILLED`:
     case `${SET_PAYMENT_METHOD}_FULFILLED`:
     case `${SET_PROMO_CODE}_FULFILLED`:
+    case `${SET_MISC_OPTIONS}_FULFILLED`:
     case `${SET_REQUESTED_AT}_FULFILLED`:
     case `${REMOVE_OPTION_FROM_LINE_ITEM}_FULFILLED`:
     case `${CREATE_NEW_ORDER}_FULFILLED`: {
@@ -68,7 +76,7 @@ export default function order(state = initialState, action) {
         ...state,
         ref,
         orderData: { ...ref.format(), wantsFutureOrder: ref.wantsFutureOrder },
-        lineItemsData: _buildFormattedLineItemsHash(ref),
+        lineItemsData: _buildFormattedLineItemsHash(ref)
       };
     }
 
@@ -76,21 +84,21 @@ export default function order(state = initialState, action) {
       return {
         ...state,
         validated: null,
-        validatedCart: null,
-      }
+        validatedCart: null
+      };
     }
 
     case `${VALIDATE_CURRENT_ORDER}_FULFILLED`: {
       return {
         ...state,
-        validated: action.payload,
+        validated: action.payload
       };
     }
 
     case `${VALIDATE_CURRENT_CART}_FULFILLED`: {
       return {
         ...state,
-        validatedCart: action.payload,
+        validatedCart: action.payload
       };
     }
 
