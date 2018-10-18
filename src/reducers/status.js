@@ -11,6 +11,7 @@ import {
   SET_ORDER_LOCATION_ID,
   SUBMIT_ORDER,
   SET_PROMO_CODE,
+  SET_MISC_OPTIONS,
   VALIDATE_CURRENT_CART,
   VALIDATE_CURRENT_ORDER,
   SET_REQUESTED_AT,
@@ -167,6 +168,7 @@ const initialState = {
   setRequestedAt: IDLE,
   fetchPayments: IDLE,
   setPromoCode: IDLE,
+  setMiscCode: IDLE,
   createPayment: IDLE,
   setDefaultPayment: IDLE,
   setPaymentMethod: IDLE,
@@ -284,6 +286,10 @@ export default function status(state = initialState, action) {
     case `${SET_PROMO_CODE}_PENDING`: return { ...state, setPromoCode: PENDING };
     case `${SET_PROMO_CODE}_FULFILLED`: return { ...state, setPromoCode: FULFILLED };
     case `${SET_PROMO_CODE}_REJECTED`: return { ...state, setPromoCode: REJECTED };
+
+    case `${SET_MISC_OPTIONS}_PENDING`: return { ...state, setMiscOptions: PENDING };
+    case `${SET_MISC_OPTIONS}_FULFILLED`: return { ...state, setMiscOptions: FULFILLED };
+    case `${SET_MISC_OPTIONS}_REJECTED`: return { ...state, setMiscOptions: REJECTED };
 
     case `${SUBMIT_ORDER}_PENDING`: return { ...state, submitOrder: PENDING };
     case `${SUBMIT_ORDER}_FULFILLED`: return { ...state, submitOrder: FULFILLED };

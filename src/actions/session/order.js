@@ -15,6 +15,7 @@ export const BIND_CUSTOMER_TO_ORDER = 'BIND_CUSTOMER_TO_ORDER';
 export const SET_PAYMENT_METHOD = 'SET_PAYMENT_METHOD';
 export const SET_ORDER_ADDRESS = 'SET_ORDER_ADDRESS';
 export const SET_PROMO_CODE = 'SET_PROMO_CODE';
+export const SET_MISC_OPTIONS = "SET_MISC_OPTIONS";
 export const SET_REQUESTED_AT = 'SET_REQUESTED_AT';
 export const CREATE_NEW_ORDER = 'CREATE_NEW_ORDER';
 export const VALIDATE_CURRENT_ORDER = 'VALIDATE_CURRENT_ORDER';
@@ -265,3 +266,8 @@ export function bindCustomerToOrder(...args) {
 export function submitOrder(...args) {
   return dispatch => dispatch(_submitOrder(...args));
 }
+
+export const setMiscOptions = (currentOrder, opts) => dispatch => {
+  const payload = currentOrder.setMiscOptions(opts).then(order => ({ order }));
+  return dispatch(fireAction(SET_MISC_OPTIONS, payload));
+};
