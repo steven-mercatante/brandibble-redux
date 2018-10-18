@@ -26,7 +26,7 @@
     "babel-loader": "^7.0.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-react-native": "^1.9.1",
-    "brandibble": "github:steven-mercatante/brandibble.js#a961c837ff64b8d979582a5d545969b5d2288f27",
+    "brandibble": "github:steven-mercatante/brandibble.js#e39b1734e387275fd367a539ec05ff9b78600ce7",
     "chai": "^3.5.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
