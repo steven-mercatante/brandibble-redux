@@ -267,7 +267,8 @@ export function submitOrder(...args) {
   return dispatch => dispatch(_submitOrder(...args));
 }
 
-export const setMiscOptions = (currentOrder, opts) => dispatch => {
+export const setMiscOptions = (currentOrder, opts) => (dispatch) => {
   const payload = currentOrder.setMiscOptions(opts).then(order => ({ order }));
-  return dispatch(fireAction(SET_MISC_OPTIONS, payload));
+  console.log('Brandibble-Redux setMiscOptions payload:', payload);
+  return dispatch({ type: SET_MISC_OPTIONS, payload });
 };
