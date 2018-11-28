@@ -116,7 +116,6 @@ function _setOrderAddress(order, address) {
 }
 
 function _bindCustomerToOrder(order, customer) {
-  console.log('bind this customer to the order:', customer);
   return {
     type: BIND_CUSTOMER_TO_ORDER,
     payload: order.setCustomer(customer).then(order => ({ order })),
